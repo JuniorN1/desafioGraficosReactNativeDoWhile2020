@@ -3,33 +3,24 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { LineChart, Grid,YAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape'
-interface ResultObjet{
-    
+interface ResultObjet{    
     ask:number;
     bid: number;
     high:number;
     low: number;
     pctChange: number;
     timestamp: number;
-    varBid: number;
-  
+    varBid: number;  
   }
 export default function graphicsLine({dataArray}:any) {
     const [dataGraphics,setDataGraphics] = useState<number[]>([]);
-    
-  
     function dataInArray(){
         if(dataArray){
             let data =[];           
             data =  dataArray.map( (items:any,index:number)=>{               
                 return parseFloat(items.high)                
-            }) 
-            //PODERIA FAZER UM POUCO MELHOR MAIS EXEMPLO VOU 
-            //ULTILIZAR UM FOR PARA PEGAR SOMENTE OS 3 ULTIMOS   
-            //DIAS PARA O GRAFICOS DE BARRA FICANDO MAIS CHARMOSO
+            })
             setDataGraphics(data.reverse());  
-  
-         
         }
         return 1;
     }
@@ -39,9 +30,6 @@ export default function graphicsLine({dataArray}:any) {
         else color='#808080';
         return color; 
     }
- 
-  
-    
     const graphicsBar = dataGraphics.map((valueCoin:number)=>
         {
             return (
@@ -49,16 +37,12 @@ export default function graphicsLine({dataArray}:any) {
                     value: valueCoin,
                     svg: {
                         fill: colorValueIs(valueCoin),
-                        onPress:()=>alert(valueCoin)
-                        
+                        onPress:()=>alert(valueCoin)                        
                     },
-                }
-                
+                }                
             )
-        }
-    
+        }    
     )
-
     useEffect(()=>{
         dataInArray()
     },[dataArray])
@@ -82,33 +66,32 @@ export default function graphicsLine({dataArray}:any) {
                  curve={shape.curveNatural}
                 style={{ height: 200, width: 200 }}
                 data={dataGraphics}
-                svg={{
-                    strokeWidth: 1,
-                    stroke: 'url(#gradient)',
-                    d:"M20 30 S90 50 60 30 S90 60"
-                   
-                    
-                }}
-                contentInset={{ top: 20, bottom: 20 }}
+                svg={
+                        {
+                            strokeWidth: 1,
+                            stroke: 'url(#gradient)',                    
+                        }
+                    }
+                contentInset={
+                    { 
+                        top: 20, 
+                        bottom: 20 
+                    }
+                }
             >
-                <Grid />
-               
+                <Grid />               
             </LineChart>
         </View>
     )
-
 }
-const styles = StyleSheet.create({
-   
+const styles = StyleSheet.create({   
     containerGraphics:{
       marginTop:'10%',
       flexDirection: 'row' 
     },
     graphicsBar:{ 
       height: 200,
-      width:200 ,
-      
-    },
-   
+      width:200 ,      
+    },   
   });
   

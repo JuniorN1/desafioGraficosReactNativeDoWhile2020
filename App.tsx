@@ -46,16 +46,15 @@ if(!allData){
   return
 }
   return (
-    <View style={styles.container}>
-       <Svg height="20%" width="50%" viewBox="0 0 100 100" >
-       <Path 
-        d="M0 0 Q50 90 70 50 T100 60 80 70"
-        fill="none" stroke="red"
-
-      
+    <ScrollView style={{flex:1}}  showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
         
-       />
-    </Svg>
+         {/* <Svg height="20%" width="50%" viewBox="0 0 100 100" >
+        <Path 
+          d="M0 0 Q50 90 70 50 T100 60 80 70"
+          fill="none" stroke="red"
+        />
+        </Svg>  */}
         <View style={styles.Header}>
           <Text style={styles.textTitle}>EXEMPLO SIMPLES</Text>
           <Text style={styles.textSubTitle}>
@@ -66,17 +65,20 @@ if(!allData){
         </View>
         <GraphicsLine dataArray={allData}/>
         <GraphicsBar dataArray={allData}/> 
-     
-     
-    </View>
+        
+      </View>
+      <View></View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display:'flex',
     backgroundColor: '#fff',
     alignItems: 'center', 
+
     
    
   },
