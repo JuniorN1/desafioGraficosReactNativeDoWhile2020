@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View,ScrollView } from 'react-native';
-import Svg, { Circle, Rect,Path } from 'react-native-svg';
+
 
 import api from './services/api'
 import GraphicsBar from './components/graphicsBar'
@@ -34,17 +34,14 @@ export default function App() {
         console.log(error)
     }  
     return 1;  
-}
-
-  
-
-useEffect(()=>{
-  queryData()
-},[])
-if(!allData){
-  alert('loading')
-  return
-}
+  }
+  useEffect(()=>{
+    queryData()
+  },[])
+  if(!allData){
+    alert('loading')
+    return
+  }
   return (
     <ScrollView style={{flex:1}}  showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
@@ -57,11 +54,6 @@ if(!allData){
         </Svg>  */}
         <View style={styles.Header}>
           <Text style={styles.textTitle}>EXEMPLO SIMPLES</Text>
-          <Text style={styles.textSubTitle}>
-            Com isso alem de poder criar um conversor de moedas,
-            poderia tambem mostra os graficos e com isso uma analise 
-            mais completa do mesmo
-          </Text>
         </View>
         <GraphicsLine dataArray={allData}/>
         <GraphicsBar dataArray={allData}/> 

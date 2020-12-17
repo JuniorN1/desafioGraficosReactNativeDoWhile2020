@@ -19,7 +19,7 @@ export default function graphicsBar({dataArray}:any) {
         for(i=0;i<3;i++){
             temp.push(data[i])
         }
-        return temp.reverse();
+        return temp;
     }
     function dataInArray(){
         if(dataArray){
