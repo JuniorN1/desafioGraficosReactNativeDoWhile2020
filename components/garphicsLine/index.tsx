@@ -1,21 +1,27 @@
 
-import React, { useEffect, useState } from 'react';
-import { StyleSheet,  View } from 'react-native';
 import * as shape from 'd3-shape';
-import { LineChart, Grid,YAxis} from 'react-native-svg-charts';
-import { Circle, G, Line, Rect,Text } from 'react-native-svg'
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Circle } from 'react-native-svg';
+import { Grid, LineChart, YAxis } from 'react-native-svg-charts';
 
-interface ResultObjet{    
+interface ArrayData{
     ask:number;
     bid: number;
     high:number;
     low: number;
     pctChange: number;
     timestamp: number;
-    varBid: number;  
+    varBid: number; 
+    
+}
+interface PropsArray{ 
+    dataArray:ArrayData[];
+  
   }
-export default function graphicsLine({dataArray}:any) {
-    const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
+export default function graphicsLine({dataArray}:PropsArray) {
+
+
     const [dataGraphics,setDataGraphics] = useState<number[]>([]);
     function dataInArray(){
         if(dataArray){
@@ -34,12 +40,13 @@ export default function graphicsLine({dataArray}:any) {
         return color; 
     }
 
-    const Decorator = ({ x, y, dataGraphics }:any) => {
+    const Decorator = ({ x, y ,dataGraphics}:any):JSX.Element[] | Element |any=> {
      
-      let ar =   dataArray.reverse().map(({high}, index):any => {
+      let ar =   dataArray.reverse().map(({high}, index) => {
            
             if(high<5.15){
                return (
+                   
                 <Circle
                     key={ index }
                     cx={ x(index) }
